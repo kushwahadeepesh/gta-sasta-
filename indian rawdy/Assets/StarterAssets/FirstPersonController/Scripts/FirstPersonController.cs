@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Photon.Pun;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
+using Photon.Pun;
 
 namespace StarterAssets
 {
@@ -119,20 +119,17 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			if (View.IsMine)
-            {
                 JumpAndGravity();
                 GroundedCheck();
                 Move();
-            }
+            
 		}
 
         private void LateUpdate()
         {
-            if (View.IsMine)
-            {
+           
                 CameraRotation();
-            }
+           
 
             CameraRotation();
 		}
