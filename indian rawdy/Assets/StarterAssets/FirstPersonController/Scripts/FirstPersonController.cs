@@ -10,8 +10,9 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class FirstPersonController : MonoBehaviour
+	public class FirstPersonController : MonoBehaviourPunCallbacks
 	{
+        private PhotonView PV;
 
         PhotonView View;
             
@@ -100,6 +101,7 @@ namespace StarterAssets
 		}
 
 		private void Start()
+
 		{
 
             View = GetComponent<PhotonView>();
@@ -117,13 +119,30 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
-		private void Update()
-		{
-                JumpAndGravity();
+
+
+        private void Update()
+        {
+            
+            if (PV.IsMine)
+            Movement();
+
+        }
+
+
+        void Start()
+
+        {
+            {
+                PV = GetComponent<PhotonView>();
+            }
+
+            JumpAndGravity();
                 GroundedCheck();
                 Move();
             
-		}
+
+        }
 
         private void LateUpdate()
         {
